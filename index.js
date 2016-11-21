@@ -47,7 +47,7 @@ function logContactRequest (req) {
   console.log(new Date(), 'Incoming contact request', ip, "\n", req.headers, "\n", req.body)
 }
 
-server.listen(8080, function () {
+server.listen(config.apiPort, function () {
   console.log(`${server.name} started and listening at ${server.url}`)
   console.log(`Allowed origins:`, config.allowedOrigins.join(', '))
 })

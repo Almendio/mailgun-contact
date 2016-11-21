@@ -3,7 +3,7 @@ module.exports = {
   domain: process.env.DOMAIN || 'example.com',
   allowedOrigins: (process.env.ALLOWED_ORIGINS || 'https://example.com,http://example.com').split(','),  // CORS settings
   contactEndpoint: process.env.CONTACT_ENDPOINT || '/contact',
-  apiPORT: process.env.VIRTUAL_PORT || 8080,    // NOTE: VIRTUAL_PORT is also used by nginx-proxy
+  apiPort: process.env.VIRTUAL_PORT || 8080,    // NOTE: VIRTUAL_PORT is also used by nginx-proxy
   mailgunApiKey: process.env.MAILGUN_API_KEY || 'key-000set000your000key000here000',
   email: {
     recipient: process.env.EMAIL_RECIPIENT || 'info@example.com',
