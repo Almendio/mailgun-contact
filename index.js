@@ -12,8 +12,14 @@ server.use(restify.bodyParser())
 
 server.post(config.contactEndpoint, function handleContact (req, res, next) {
   logContactRequest(req)
-  if (req.body && req.body.name && req.body.email && req.body.message) {
-    sendMail.sendContactMail(req.body.name, req.body.email, req.body.message)
+  let body
+  try {
+    body = JSON.parse(req.body)
+  } catch (e) {
+    body = req.body
+  }
+  if (body && body.name && body.email && body.message) {
+    sendMail.sendContactMail(body.name, body.email, body.message)
       .then((result) => {
         console.log(result)
         res.send(200)
@@ -44,7 +50,7 @@ function restrictAccessToAllowedOrigins (req, res, next) {
 
 function logContactRequest (req) {
   var ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress
-  console.log(new Date(), 'Incoming contact request', ip, "\n", req.headers, "\n", req.body)
+  console.log(new Date(), 'Incoming contact request', ip, req.headers, req.body)
 }
 
 server.listen(config.apiPort, function () {
