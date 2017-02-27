@@ -22,7 +22,7 @@ server.post(config.contactEndpoint, function handleContact (req, res, next) {
     sendMail.sendContactMail(body.name, body.email, body.message)
       .then((result) => {
         console.log(result)
-        res.send(200)
+        res.send(200, JSON.stringify(null))
       })
       .catch((err) => {
         console.error('Error during sending', err, JSON.stringify(err))
